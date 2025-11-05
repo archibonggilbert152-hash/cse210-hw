@@ -4,8 +4,8 @@ public class Entery
   public string _prompt;
   public string _userResponse;
 
-public void Display()
-{
-  Console.WriteLine($"{_date} - {_prompt}");
-}
+  public void Display()
+  {
+    Console.WriteLine($"{_date} - {_prompt}");
+  }
 }
