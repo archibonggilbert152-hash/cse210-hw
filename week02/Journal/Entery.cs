@@ -6,6 +6,15 @@ public class Entery
 
   public void Display()
   {
-    Console.WriteLine($"{_date} - {_prompt}");
+    Console.WriteLine($"Date: {_date}");
+        Console.WriteLine($"Prompt: {_prompt}");
+        Console.WriteLine($"Response: {_response}");
+        Console.WriteLine();
   }
+  
+    // Converts the entry to a single saveable line
+    public string GetSaveFormat()
+    {
+        return $"{_date}|{_prompt}|{_response}";
+    }
 }

@@ -1,25 +1,48 @@
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography.X509Certificates;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 public class Journal
 {
-  public List<Entery> _entries = new List<Entery>();
+    public List<Entry> _entries = new List<Entry>();
 
-  public void Display()
-  {
-    foreach (Entery entry in _entries)
+    public void AddEntry(Entry newEntry)
     {
-      entry.Display();
+        _entries.Add(newEntry);
     }
-  }
 
-  public void SaveToFile(string file)
-  {
-    // Add your save implementation here
-  }
+    public void DisplayJournal()
+    {
+        foreach (Entry entry in _entries)
+        {
+            entry.Display();
+        }
+    }
 
-  public void LoadFromFile(string file)
-  {
-    // Add your load implementation here
-  }
+    public void SaveJournal(string fileName)
+    {
+        using (StreamWriter outputFile = new StreamWriter(fileName))
+        {
+            foreach (Entry entry in _entries)
+            {
+                outputFile.WriteLine(entry.GetSaveFormat());
+            }
+        }
+    }
+
+    public void LoadJournal(string fileName)
+    {
+        _entries.Clear();
+        string[] lines = File.ReadAllLines(fileName);
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split('|');
+            Entry entry = new Entry();
+            entry._date = parts[0];
+            entry._prompt = parts[1];
+            entry._response = parts[2];
+            _entries.Add(entry);
+        }
+    }
 }
