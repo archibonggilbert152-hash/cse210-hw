@@ -30,7 +30,7 @@ public class Journal
         }
     }
 
-    public void LoadJournal(string fileName)
+    public void csv(string fileName) 
     {
         _entries.Clear();
         string[] lines = File.ReadAllLines(fileName);
@@ -45,4 +45,33 @@ public class Journal
             _entries.Add(entry);
         }
     }
+    // Helper to correctly split CSV lines
+private string[] SplitCsvLine(string csvLine)
+{
+    List<string> fields = new List<string>();
+    bool inQuotes = false;
+    string field = "";
+
+    foreach (char c in csvLine)
+    {
+        if (c == '"')
+        {
+            inQuotes = !inQuotes;
+            continue;
+        }
+
+        if (c == ',' && !inQuotes)
+        {
+            fields.Add(field);
+            field = "";
+        }
+        else
+        {
+            field += c;
+        }
+    }
+
+    fields.Add(field);
+    return fields.ToArray();
+}
 }

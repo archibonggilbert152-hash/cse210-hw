@@ -13,7 +13,7 @@ public class Entery
   }
   
     // Converts the entry to a single saveable line
-    public string GetSaveFormat()
+    public string csv()
     {
         return $"{_date}|{_prompt}|{_response}";
     }

@@ -52,7 +52,7 @@ class Program
             }
             else if (choice == "3")
             {
-                Console.Write("\nEnter filename to save to: ");
+                Console.Write("\nEnter filename to save to(e.g., journal.csv): ");
                 string fileName = Console.ReadLine();
                 journal.SaveJournal(fileName);
                 Console.WriteLine("Journal saved successfully.");
